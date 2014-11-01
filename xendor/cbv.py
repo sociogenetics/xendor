@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import simplejson
+
 """Небольшой набор компонентов для class based view """
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import get_current_site
@@ -7,7 +9,6 @@ from django.core.urlresolvers import reverse
 from django.db.models.query_utils import Q
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from django.utils import simplejson
 from django.views.generic.base import View, TemplateResponse, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView

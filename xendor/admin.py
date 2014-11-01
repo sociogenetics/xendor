@@ -3,11 +3,11 @@ from django.contrib import admin
 from django.conf import settings
 
 from xendor.forms import PageAdminForm
-from xendor.tree_admin import XDP17TreeModelAdmin
 from xendor.models import Page, Fragment, Setting
+from xendor.structure import Structure
+from xendor.tree_admin import XendorTreeModelAdmin
 
-
-class PageAdmin(XDP17TreeModelAdmin):
+class PageAdmin(XendorTreeModelAdmin):
     admin_label = u'Управление контентом'
 
     fieldsets = (
@@ -31,22 +31,23 @@ class PageAdmin(XDP17TreeModelAdmin):
         })
     )
 
-    list_display = ['actions_column', 'indented_short_title', 'app_extension']
+    list_display = ['actions_column', 'indented_short_title', 'extension']
+    list_display = ('title', 'extension', 'lft', 'rght', 'tree_id', 'level')
     list_filter = ('visible', )
     
     def drag(self, obj):
         return '<div class="drag_handle"></div>'
     
     drag.allow_tags = True
-        
+
+    def extension(self, obj):
+        if obj.app_extension:
+            return Structure().apps.get(obj.app_extension).get('app_name')
+
+    extension.short_description = u'Расширение'
+
     form = PageAdminForm
     
-    # class Media:
-    #     js = [
-    #         '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
-    #         '/static/js/tinymce_setup.js',
-    #     ]
-
 
 class ChunkAdmin(admin.ModelAdmin):
     """Текстовые блоки (чанки)"""
