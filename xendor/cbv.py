@@ -77,7 +77,13 @@ class RefererRedirectWithMessage(RedirectView):
     action = lambda o: None
 
     def get_redirect_url(self, *args, **kwargs):
-        messages.add_message(self.request, messages.SUCCESS, self.action_message)
+
+        if callable(self.action_message):
+            action_message = self.action_message()
+        else:
+            action_message = self.action_message
+
+        messages.add_message(self.request, messages.SUCCESS, action_message)
         return self.request.META.get('HTTP_REFERER') or '/'
 
     def get(self, request, *args, **kwargs):
