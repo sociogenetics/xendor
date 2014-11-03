@@ -32,7 +32,6 @@ class PageAdmin(XendorTreeModelAdmin):
     )
 
     list_display = ['actions_column', 'indented_short_title', 'extension']
-    list_display = ('title', 'extension', 'lft', 'rght', 'tree_id', 'level')
     list_filter = ('visible', )
     
     def drag(self, obj):
