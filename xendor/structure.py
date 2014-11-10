@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+from django.db.utils import ProgrammingError
 from django.utils import translation
 from django.conf import settings
 from django.db.models.signals import post_delete, post_save
@@ -312,6 +313,9 @@ class Structure(object):
         return json.dumps(self.tree.as_json(), indent=4)
 
 
-#регенерация структуры при изменении структурообразующих элементов моделей
-post_delete.connect(Structure().regenerate)
-post_save.connect(Structure().regenerate)
+try:
+    #регенерация структуры при изменении структурообразующих элементов моделей
+    post_delete.connect(Structure().regenerate)
+    post_save.connect(Structure().regenerate)
+except ProgrammingError:
+    pass

@@ -41,7 +41,10 @@ class PageAdmin(XendorTreeModelAdmin):
 
     def extension(self, obj):
         if obj.app_extension:
-            return Structure().apps.get(obj.app_extension).get('app_name')
+            try:
+                return Structure().apps.get(obj.app_extension).get('app_name')
+            except:
+                return obj.app_extension
 
     extension.short_description = u'Расширение'
 
