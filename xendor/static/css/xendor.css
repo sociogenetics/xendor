@@ -1,0 +1,19 @@
+.xendor-messages {
+    background: #607D8B;
+    color: white;
+    padding: 15px;
+}
+
+.xendor-messages .glyphicon {
+    font-size: 24px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.xendor-messages.error {
+    background: #F44336;
+}
+.xendor-messages.success {
+    background: #009688;
+}

@@ -1,0 +1,35 @@
+{% load xendor_tags %}
+{% if messages %}
+    <div class="modal" id="MessgeModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Сообщение</h4>
+                </div>
+                <div class="modal-body" style="padding: 0">
+                    <ul class="list-unstyled" style="margin-bottom: 0">
+                        {% for message in messages %}
+                            <li class="xendor-messages {{ message.tags }}">
+                                {% if message.tags == 'success' %}
+                                    {% xicon 'ok-sign' %}
+                                {% elif message.tags == 'error' %}
+                                    {% xicon 'remove-sign' %}
+                                {% else %}
+                                    {% xicon 'info-sign' %}
+                                {% endif %}
+                                {{ message|safe }}
+                                <br class="clear"/>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer" style="margin-top: 0">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" data-toggle="modal" data-target="#MessgeModal" class="clickme"></a>
+{% endif %}
