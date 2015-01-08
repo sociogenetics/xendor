@@ -143,11 +143,11 @@ class MultiSortingMixin(ListView):
                 else:
                     pars.append(unicode(self.request.GET.get(field[0]) == 'desc' and '-' or '') + field[0])
 
-        return super(SortingMixin, self).get_queryset().order_by(*pars)
+        return super(MultiSortingMixin, self).get_queryset().order_by(*pars)
 
     def get_context_data(self, **kwargs):
 
-        context = super(SortingMixin, self).get_context_data(**kwargs)
+        context = super(MultiSortingMixin, self).get_context_data(**kwargs)
 
         context.update({
             'sorting': [(f[0], self.request.GET.get(f[0]) == 'asc' and 'desc' or 'asc', f[1],

@@ -105,38 +105,39 @@ class Menu(object):
 
         nodes = []
 
-        for node in source_node.children:
-            
-            #обработка логики исключений и включений по параметрам
-            if self._check_condition_by_parameters(node):
-                continue
+        if source_node:
+            for node in source_node.children:
 
-            if node.in_menu or self.show_hidden:
-                added_node = {
-                    'title': node.title,
-                    'url': node.get_url(),
-                    'children': [],
-                    'active': False,
-                    'current': False,
-                    'level': level,
-                    'parameters': node.parameters,
-                }
+                #обработка логики исключений и включений по параметрам
+                if self._check_condition_by_parameters(node):
+                    continue
 
-                children = self._init_nodes(node, level + 1)
+                if node.in_menu or self.show_hidden:
+                    added_node = {
+                        'title': node.title,
+                        'url': node.get_url(),
+                        'children': [],
+                        'active': False,
+                        'current': False,
+                        'level': level,
+                        'parameters': node.parameters,
+                    }
 
-                if self.show_children:
-                    added_node['children'] = children
+                    children = self._init_nodes(node, level + 1)
 
-                if list(node.get_path_from_url(self.url)):
-                    added_node['active'] = True
+                    if self.show_children:
+                        added_node['children'] = children
 
-                if self.url == node.get_url():
-                    added_node['active'] = added_node['current'] = True
+                    if list(node.get_path_from_url(self.url)):
+                        added_node['active'] = True
 
-                if added_node['active']:
-                    added_node['children'] = self._init_nodes(node, level+1)
+                    if self.url == node.get_url():
+                        added_node['active'] = added_node['current'] = True
 
-                nodes.append(added_node)
+                    if added_node['active']:
+                        added_node['children'] = self._init_nodes(node, level+1)
+
+                    nodes.append(added_node)
 
         #чистим лишние уровни
         if level == 0:

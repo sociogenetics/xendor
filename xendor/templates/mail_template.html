@@ -1,37 +1,48 @@
 {% load xendor_tags %}<!DOCTYPE html>
 <head>
-<meta charset="utf-8" />
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100&subset=latin,cyrillic' rel='stylesheet'
+          type='text/css'>
 </head>
 <body>
-    <div class="outer" style="max-width: 800px; margin: 0 auto; font-family: Roboto, 'Segoe UI', Arial, sans-serif; border: solid 1px #eee;">
-        <div class="header" style="background: #fff; padding: 25px 0 30px; font-size: 12px; color: #b8b8b8;">
-            <div class="inner" style="max-width: 600px; margin: 0 auto; padding: 0 3%;">
-                <div class="col-sm col-left" style="float:left">
-                <img alt="Eurasia-forum" src="{{ '/logo.jpg'|base64 }}" />
-                </div>
-                <div class="col-sm col-right" style="float:right; line-height: 40px;">
-                    <a href="#" class="col-sm" style="text-decoration: none; color: #353535; margin: 0px 3px; white-space: nowrap;">ссылка 1</a>
-                    <span class="hide-sm">/</span>
-                    <a href="#" class="col-sm" style="text-decoration: none; color: #353535; margin: 0px 3px; white-space: nowrap;">ссылка 2</a>
-                </div>
-                <div class="clearfix" style="clear:both"></div>
+<div class="outer"
+     style="max-width: 800px; margin: 0 auto; font-family: Roboto, 'Segoe UI', Arial, sans-serif; border: solid 1px #eee;">
+    <div class="header" style="background: #fff; padding: 25px 0 30px; font-size: 12px; color: #b8b8b8;">
+        <div class="inner" style="max-width: 600px; margin: 0 auto; padding: 0 3%;">
+            <div class="col-sm col-left" style="float:left">
+                {% block logo %}
+                    <img alt="{{ site_name }}" src="{{ '/logo.jpg'|base64 }}"/>
+                {% endblock %}
             </div>
-        </div>
-        <div class="content" style="margin-bottom: 20px;">
-            <div class="inner" style="max-width: 600px; margin: 0 auto; font-family: 'Myriad Pro',Roboto,Arial,sans-serif; font-size: 14px; color: #3B3B3B; padding: 0 3%;">
-            {% block content %}
-                <p class="thin" style="font-size: 23px; font-weight: 300;font-family: Roboto,Arial,sans-serif;">{{ subject }}</p>
-            {{ text|safe }}
-            {% endblock %}
+            <div class="col-sm col-right" style="float:right; line-height: 40px;">
+                <a href="#" class="col-sm"
+                   style="text-decoration: none; color: #353535; margin: 0px 3px; white-space: nowrap;">ссылка 1</a>
+                <span class="hide-sm">/</span>
+                <a href="#" class="col-sm"
+                   style="text-decoration: none; color: #353535; margin: 0px 3px; white-space: nowrap;">ссылка 2</a>
             </div>
-        </div>
-        <div class="footer" style="background: none repeat scroll 0% 0% #000; padding: 20px 0px 0; font-size: 13px; color: #FFF;">
-            <div class="inner" style="max-width: 600px; margin: 0 auto; padding: 0 3%;">
-                <div class="col-left col-sm" style="float: left; margin-bottom: 20px;">Copyright © {{ site_name }} 2014, All rights reserved.</div>
-                <div class="clearfix" style="clear: both;"></div>
-            </div>
+            <div class="clearfix" style="clear:both"></div>
         </div>
     </div>
+    <div class="content" style="margin-bottom: 20px;">
+        <div class="inner"
+             style="max-width: 600px; margin: 0 auto; font-family: 'Myriad Pro',Roboto,Arial,sans-serif; font-size: 14px; color: #3B3B3B; padding: 0 3%;">
+            {% block content %}
+                <p class="thin"
+                   style="font-size: 23px; font-weight: 300;font-family: Roboto,Arial,sans-serif;">{{ subject }}</p>
+                {{ text|safe }}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="footer"
+         style="background: none repeat scroll 0% 0% #000; padding: 20px 0px 0; font-size: 13px; color: #FFF;">
+        <div class="inner" style="max-width: 600px; margin: 0 auto; padding: 0 3%;">
+            <div class="col-left col-sm" style="float: left; margin-bottom: 20px;">Copyright © {{ site_name }} 2014, All
+                rights reserved.
+            </div>
+            <div class="clearfix" style="clear: both;"></div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

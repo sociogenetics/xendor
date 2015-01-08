@@ -18,7 +18,7 @@ class HomeView(TemplateView):
             page = None
 
         context.update({
-            'page': page
+            'page': page,
         })
 
         return context

@@ -41,7 +41,6 @@ def image_process(image, width, height, opt=[]):
 
         elif 'blank' in effect:
             opt = effect.split(':')
-
             if len(opt) == 4:
                 blank = Image.new('RGBA', [width, height], (int(opt[1]), int(opt[2]), int(opt[3]), 0))
             elif len(opt) == 5:
