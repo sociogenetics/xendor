@@ -143,7 +143,7 @@ def thumbnail(file, size='200;200'):
                     image = Image.open(filename)
                 except IOError:
                     if settings.DEBUG:
-                        raise IOError(u"Сan't find stuff file (check NO_IMG_PATH in settings.py)")
+                        raise IOError(u"Can't find stuff file (check NO_IMG_PATH in settings.py)")
                     return miniature_url
 
                 opt = ['blank', ]

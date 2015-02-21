@@ -345,12 +345,29 @@ def get_add(context, value, name_get_parameter='page', exclude_vars=''):
     мегаполезная шняга: формирует ссцыль для постранички, не трогает остальные get-параметры если они есть"""
 
     exclude_vars = exclude_vars.split(',')
+    res_get = ''
+    parameters = context['request'].GET
+
+    # Модифицированная блядохипстерская и неправильно работающая лямбда
+    
+    for key in parameters:
+        if key in exclude_vars: continue
+        if key == name_get_parameter:
+            res_get += '&' + unicode(key) + '=' + unicode(value)
+        else:
+            for val in parameters.getlist(key):
+                res_get += '&' + key + '=' + val
+
+    if not name_get_parameter in parameters:
+        res_get += '&' + unicode(name_get_parameter) + '=' + unicode(value)
+
     context.update({
-        'value': '?' + '&'.join(
-            reduce(lambda q, h: h[0] not in exclude_vars and q.append(unicode(h[0]) + '=' + unicode(h[1])) or q,
-                   (lambda d, p:
-                    d.update({name_get_parameter: p}) or d
-                   )(dict(context['request'].GET.items()), value).items(), []))
+        'value': u'?' + res_get[1:]
+        # 'value': '?' + '&'.join(
+        #     reduce(lambda q, h: h[0] not in exclude_vars and q.append(unicode(h[0]) + '=' + unicode(h[1])) or q,
+        #            (lambda d, p:
+        #             d.update({name_get_parameter: p}) or d
+        #            )(dict(context['request'].GET.items()), value).items(), []))
     })
     return context
 
