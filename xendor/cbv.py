@@ -362,8 +362,8 @@ class PaginatedListMixin(ListView):
     """Класс с преднастроенным пагинатором
         вызов постранички в шаблоне: {{ paginator.render }}
     """
-    def get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True):
-        return make_page_for_cbv(self.request, queryset, count_per_page=per_page)
+    def get_paginator(self, queryset, per_page, orphans=0, allow_empty_first_page=True, page_range=10):
+        return make_page_for_cbv(self.request, queryset, count_per_page=per_page, page_range=page_range)
 
 
 class VisibleObjectListMixin(ListView):
