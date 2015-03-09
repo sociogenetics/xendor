@@ -58,7 +58,7 @@ def level_active(nodes=[]):
 
 
 @register.inclusion_tag('dummy.html', takes_context=True)
-def menu(context, params="", template='menu/menu.html'):
+def menu(context, params="", template='menu/menu.html', current_path=None):
     """Рендер меню"""
 
     # проверка наличия контекста
@@ -67,9 +67,12 @@ def menu(context, params="", template='menu/menu.html'):
     except KeyError:
         return {'template': 'empty.html'}
 
+    if not current_path:
+        current_path = request.get_full_path()
+
     # инстанцирование класса меню
     try:
-        current_url = XendorSettings().get('activated_node') or request.get_full_path().split('?')[0]
+        current_url = XendorSettings().get('activated_node') or current_path.split('?')[0]
         menu = Menu(current_url, parameters=_render_pars(params))
     except Menu.MenuException:
         if settings.DEBUG:
